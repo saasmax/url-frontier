@@ -150,6 +150,6 @@ public class QueueMetadata implements QueueInterface {
         if (limit.isEmpty()) {
             return false;
         }
-        return getCountCompleted() >= limit.get();
+        return beingProcessed.size() + getCountCompleted() >= limit.get();
     }
 }
