@@ -888,6 +888,7 @@ public abstract class AbstractFrontierService
             }
         }
 
+        responseObserver.onNext(Empty.getDefaultInstance());
         responseObserver.onCompleted();
     }
 
