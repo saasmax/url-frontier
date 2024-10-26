@@ -151,6 +151,10 @@ public class QueueMetadata implements QueueInterface {
             return false;
         }
 
-        return getInProcess(System.currentTimeMillis()) + getCountCompleted() >= limit.get();
+        int inProgress = getInProcess(System.currentTimeMillis());
+        int completed = getCountCompleted();
+        int limitFinal = limit.get();
+
+        return active.get() + completed > limitFinal;
     }
 }
