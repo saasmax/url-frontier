@@ -589,6 +589,12 @@ public abstract class AbstractFrontierService
                 return;
             }
 
+            // limit reached
+            if (queue.isLimitReached()) {
+                synchStreamObs.onCompleted();
+                return;
+            }
+
             // too early?
             int delay = queue.getDelay();
             if (delay == -1) delay = getDefaultDelayForQueues();
