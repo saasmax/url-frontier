@@ -115,7 +115,12 @@ public class URLQueue extends PriorityQueue<InternalURL> implements QueueInterfa
             return false;
         }
 
-        return getCountCompleted() >= limit.get();
+        return getInProcess(System.currentTimeMillis()) + getCountCompleted() >= limit.get();
+    }
+
+    @Override
+    public Optional<Integer> getCrawlLimit() {
+        return limit;
     }
 
     /**
