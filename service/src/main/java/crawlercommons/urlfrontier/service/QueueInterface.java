@@ -3,6 +3,8 @@
 
 package crawlercommons.urlfrontier.service;
 
+import java.util.Optional;
+
 /** Defines the behaviour of a queue * */
 public interface QueueInterface {
 
@@ -27,4 +29,6 @@ public interface QueueInterface {
     public void setCrawlLimit(int crawlLimit);
 
     public Boolean isLimitReached();
+
+    public Optional<Integer> getCrawlLimit();
 }

@@ -157,4 +157,9 @@ public class QueueMetadata implements QueueInterface {
 
         return inProgress + completed > limitFinal;
     }
+
+    @Override
+    public Optional<Integer> getCrawlLimit() {
+        return limit;
+    }
 }

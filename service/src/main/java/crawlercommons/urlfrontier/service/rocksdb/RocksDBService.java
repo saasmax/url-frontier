@@ -612,6 +612,12 @@ public class RocksDBService extends AbstractFrontierService {
                     int completed = entry.getValue().getCountCompleted();
                     bb.putInt(active);
                     bb.putInt(completed);
+                    if (entry.getValue().getCrawlLimit().isPresent()) {
+                        bb.putInt(entry.getValue().getCrawlLimit().get());
+                    } else {
+                        bb.putInt(0);
+                    }
+
                     rocksDB.put(
                             columnFamilyHandleList.get(2),
                             entry.getKey().toString().getBytes(),
@@ -646,6 +652,10 @@ public class RocksDBService extends AbstractFrontierService {
                 rocksIterator.value(bb);
                 int active = bb.getInt();
                 int completed = bb.getInt();
+                int limit = bb.getInt();
+                if (limit > 0) {
+                    queueMD.setCrawlLimit(limit);
+                }
                 bb.clear();
                 queueMD.setActiveCount(active);
                 queueMD.setCompletedCount(completed);
